@@ -1,0 +1,9 @@
+c:\users\никита\documents\visual studio 2013\Projects\2GIS_test1\2GIS_test1\bin\Debug\2GIS_test1.exe.config
+c:\users\никита\documents\visual studio 2013\Projects\2GIS_test1\2GIS_test1\bin\Debug\2GIS_test1.exe
+c:\users\никита\documents\visual studio 2013\Projects\2GIS_test1\2GIS_test1\bin\Debug\2GIS_test1.pdb
+c:\users\никита\documents\visual studio 2013\Projects\2GIS_test1\2GIS_test1\obj\Debug\2GIS_test1.csprojResolveAssemblyReference.cache
+c:\users\никита\documents\visual studio 2013\Projects\2GIS_test1\2GIS_test1\obj\Debug\2GIS_test1.exe
+c:\users\никита\documents\visual studio 2013\Projects\2GIS_test1\2GIS_test1\obj\Debug\2GIS_test1.pdb
+C:\Users\Денис\Desktop\никита\2GIS_test1\2GIS_test1\2GIS_test1\bin\Debug\2GIS_test1.exe.config
+C:\Users\Денис\Desktop\никита\2GIS_test1\2GIS_test1\2GIS_test1\obj\Debug\2GIS_test1.exe
+C:\Users\Денис\Desktop\никита\2GIS_test1\2GIS_test1\2GIS_test1\obj\Debug\2GIS_test1.pdb
