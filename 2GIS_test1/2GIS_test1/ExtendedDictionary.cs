@@ -2,15 +2,18 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Threading.Tasks; /* подключены не используемые пространства */
 
-
+/*я бы не стал так называть, хотя бы потому что не системный класс и тем более по умолчанию internal*/
 namespace System.Collections.Generic    //а почему нет?)
 {
-   
+   /* с модификатором доступа будет понятнее*/
     class ExtendedDictionary<TId, TName, TValue>: IEnumerable<KeyValuePair<KeysPair<TId, TName>, TValue>>
     {
-        
+
+        /*Если уж это коллекция, а это она, то нужны все стандартные методы, такие как Add(), Clear(), ContainsKey(), ContainsValue() 
+         * и др., возможно свойства Keys и Values, в общем например всё, что есть у стандартного словаря https://msdn.microsoft.com/ru-ru/library/xfhwa508(v=vs.110).aspx */
+
         /*Идея простая: всего три словаря. Первый содержит парный ключ (структура из Id и name) и значение. Он обеспечивает наибыстрейший селективный доступ.
          Второй содержит Id как ключ и List<TValue> как значение - это список элементов с таким Id, невзирая на Name. Добавление в основной словарь и кэши 
          * будет происходить при добавлении элемента через [].
@@ -18,7 +21,7 @@ namespace System.Collections.Generic    //а почему нет?)
          Таким образом, селективный доступ и выборки по каждому из ключей имеют вычислительную сложность O(1)*/
 
         Dictionary<KeysPair<TId, TName>, TValue> full_dic;
-        Dictionary<TId, List<TValue>> fast_acces_by_id;
+        Dictionary<TId, List<TValue>> fast_acces_by_id; /*название как то так се, это же коллекция, как то надо с этим связать*/
         Dictionary<TName, List<TValue>> fast_acces_by_name;
 
         public int Count
@@ -26,15 +29,18 @@ namespace System.Collections.Generic    //а почему нет?)
             get{ return full_dic.Count(); }
         }
 
-        public ExtendedDictionary(int size=64)
+
+        public ExtendedDictionary(int size=64) /* лучше сделать размер по умолчанию 0, так правильнее, нет смысла заранее выделять память*/
         {
-            size = size > 0 ? size : 64;
-            full_dic = new Dictionary<KeysPair<TId, TName>,TValue>(size);
+            size = size > 0 ? size : 64; /* тут либо size либо 0  */
+            full_dic = new Dictionary<KeysPair<TId, TName>,TValue>();
             fast_acces_by_id = new Dictionary<TId,List<TValue>>(size);
             fast_acces_by_name = new Dictionary<TName, List<TValue>>(size);
             
         }
 
+        /* обращение по составному индексу я бы сказал*/
+        /*и это не правильный подход для коллекций, тебе нужно отдельно писать функцию Add(), а по индексу только get() */
         //Реализуем обращение через квадратные скобки
         public TValue this[TId id, TName name]
         {
@@ -54,16 +60,21 @@ namespace System.Collections.Generic    //а почему нет?)
             }
         }
 
+        /*думаю нет смысла возвращать массив и тем более к нему преобразовывать, достаточно возвращать IEnumerable<T>*/
         public TValue[] GetByName(TName name)
         {
             return fast_acces_by_name[name].ToArray();      //Ну как, быстро? ))
         }
 
+        /* аналогично*/
         public TValue[] GetById(TId id)
-        {
+        {                                                   /*про какую инкапсуляцию идет речь? */
             return fast_acces_by_id[id].ToArray();          //Вообще еще быстрее возвращать сразу List, но тогда я нарушу инкапсуляцию.
+                                    
         }
 
+
+        /*а почему не просто Remove?*/
         public bool TryRemove(TId id, TName name)
         {
             if (full_dic.ContainsKey(new KeysPair<TId, TName>(id, name)))   //Если такой ключ есть
@@ -105,6 +116,7 @@ namespace System.Collections.Generic    //а почему нет?)
     }
 
 
+    /*Типы лучше описывать в отдельном файле*/
     //Структура составного ключа.
     struct KeysPair<TId, TName>
     {

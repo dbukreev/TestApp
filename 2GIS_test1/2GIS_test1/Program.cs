@@ -2,17 +2,19 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Threading.Tasks; /* подключены не используемые пространства */
 
 namespace _2GIS_test1
 {
     class Program
     {
-        
+        /*метод Main должен быть максимально разгружен, не нужно в нем тестировать, делай через методы, классы, и лучше всего конечно все операции с коллекцией unit-тестами покрыть */
         static void Main(string[] args)
         {
+            /* в задании написано Id в ключе должен быть UserType!!!*/
             ExtendedDictionary<int, UserType, string> a = new ExtendedDictionary<int, UserType, string>();
 
+            /*не красиво же так и не правильно добавлять, нужен метод Add()*/
             a[37, new UserType("Nikita", 23)] = "Programmer";
             a[666, new UserType("Nikita", 23)] = "Clone";
             a[38, new UserType("Andrey", 33)] = "1st Programmer";
@@ -48,6 +50,7 @@ namespace _2GIS_test1
 
         }
 
+        /*типы нужно описывать в отдельном файле*/
         struct UserType
         {
             int age;
